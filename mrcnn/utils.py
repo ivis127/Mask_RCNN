@@ -18,6 +18,7 @@ import scipy
 import skimage.color
 import skimage.io
 import skimage.transform
+import skimage.util
 import urllib.request
 import shutil
 import warnings
