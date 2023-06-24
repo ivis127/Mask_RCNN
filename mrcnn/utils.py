@@ -895,11 +895,18 @@ def resize(image, output_shape, order=1, mode='constant', cval=0, clip=True,
     version. And it provides a central place to control resizing defaults.
     """
     if LooseVersion(skimage.__version__) >= LooseVersion("0.17"):
-        return skimage.util.img_as_bool(skimage.transform.resize(
-            image.astype(np.float32), output_shape,
-            order=order, mode=mode, cval=cval, clip=clip,
-            preserve_range=preserve_range, anti_aliasing=anti_aliasing,
-            anti_aliasing_sigma=anti_aliasing_sigma))
+        if np.issubdtype(image.dtype, np.bool):
+            return skimage.util.img_as_bool(skimage.transform.resize(
+                image.astype(np.float32), output_shape,
+                order=order, mode=mode, cval=cval, clip=clip,
+                preserve_range=preserve_range, anti_aliasing=anti_aliasing,
+                anti_aliasing_sigma=anti_aliasing_sigma))
+        else:
+            return skimage.transform.resize(
+                image.astype(np.float32), output_shape,
+                order=order, mode=mode, cval=cval, clip=clip,
+                preserve_range=preserve_range, anti_aliasing=anti_aliasing,
+                anti_aliasing_sigma=anti_aliasing_sigma)
     if LooseVersion(skimage.__version__) >= LooseVersion("0.14"):
         # New in 0.14: anti_aliasing. Default it to False for backward
         # compatibility with skimage 0.13.
