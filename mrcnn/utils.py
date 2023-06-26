@@ -896,11 +896,11 @@ def resize(image, output_shape, order=1, mode='constant', cval=0, clip=True,
     """
     if LooseVersion(skimage.__version__) >= LooseVersion("0.17"):
         if image.dtype.type == np.dtype(np.bool).type :
-            return skimage.transform.resize(
+            return  skimage.util.img_as_bool(skimage.transform.resize(
                 image, output_shape,
-                order=0, mode=mode, cval=cval, clip=clip,
+                order=order, mode=mode, cval=cval, clip=clip,
                 preserve_range=preserve_range, anti_aliasing=anti_aliasing,
-                anti_aliasing_sigma=anti_aliasing_sigma)
+                anti_aliasing_sigma=anti_aliasing_sigma))
         return skimage.transform.resize(
             image, output_shape,
             order=order, mode=mode, cval=cval, clip=clip,
