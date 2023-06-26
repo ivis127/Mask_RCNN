@@ -895,7 +895,7 @@ def resize(image, output_shape, order=1, mode='constant', cval=0, clip=True,
     version. And it provides a central place to control resizing defaults.
     """
     if LooseVersion(skimage.__version__) >= LooseVersion("0.17"):
-        if image.type == np.dtype(np.bool) :
+        if image.dtype == np.dtype('bool') :
             return  skimage.util.img_as_bool(skimage.transform.resize(
                 image, output_shape,
                 order=order, mode=mode, cval=cval, clip=clip,
