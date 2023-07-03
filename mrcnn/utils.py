@@ -895,7 +895,7 @@ def resize(image, output_shape, order=1, mode='constant', cval=0, clip=True,
     of skimage. This solves the problem by using different parameters per
     version. And it provides a central place to control resizing defaults.
     """
-    return cv2.resize(image, outpu_shape)
+    return cv2.resize(image, output_shape)
     if LooseVersion(skimage.__version__) >= LooseVersion("0.17"):
         if image.dtype == np.bool :
             return  skimage.transform.resize(
